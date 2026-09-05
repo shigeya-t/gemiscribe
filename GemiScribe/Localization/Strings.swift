@@ -85,6 +85,11 @@ enum LocKey: String, CaseIterable, Sendable {
     case debugLoggingForced
     case resetDefaults
     case close
+    case buildSection
+    case buildVersion
+    case buildCommit
+    case buildDate
+    case buildCopied
 
     // Errors
     case errorNoAPIKey
@@ -182,6 +187,11 @@ enum Strings {
         .debugLoggingForced: "--debug 付きで起動されているため、この実行中は常に有効です。",
         .resetDefaults: "既定値に戻す",
         .close: "閉じる",
+        .buildSection: "ビルド情報",
+        .buildVersion: "バージョン",
+        .buildCommit: "コミット",
+        .buildDate: "ビルド日時",
+        .buildCopied: "コピーしました",
 
         .errorNoAPIKey: "Gemini API キーが設定されていません。設定から入力してください。",
         .errorTranslationRateLimitedFormat: "翻訳が API の利用上限に達しました。%d 秒後に再試行します。無料枠を使い切っている場合は、翻訳トグルを OFF にすれば文字起こしはそのまま続けられます。(%@)",
@@ -276,6 +286,11 @@ enum Strings {
         .debugLoggingForced: "Forced on for this run because the app was launched with --debug.",
         .resetDefaults: "Reset to defaults",
         .close: "Close",
+        .buildSection: "Build",
+        .buildVersion: "Version",
+        .buildCommit: "Commit",
+        .buildDate: "Built",
+        .buildCopied: "Copied",
 
         .errorNoAPIKey: "No Gemini API key is set. Add one in Settings.",
         .errorTranslationRateLimitedFormat: "Translation hit the API rate limit; retrying in %d s. If the free tier is exhausted, switch the Translate toggle off and transcription keeps running. (%@)",

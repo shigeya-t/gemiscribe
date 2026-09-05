@@ -49,6 +49,10 @@ Tests:
 xcodebuild test -project GemiScribe.xcodeproj -scheme GemiScribe -destination 'platform=macOS'
 ```
 
+The bottom of the Settings window shows the running build's version, commit hash and build time. A
+trailing `+` on the hash means it was built from a working tree with uncommitted changes. It is the
+quickest way to tell whether a rebuilt app has actually been relaunched.
+
 Launching with debug logging records every Live API frame in the unified log:
 
 ```bash

@@ -43,6 +43,11 @@ Notes:
   `\"` escapes; when parsing `log show` output, match `inputTranscription` loosely rather than as
   strict JSON.
 - Signing is manual with `DEVELOPMENT_TEAM`; on another Mac change it in build settings.
+- The app target has a "Stamp build info" script phase that writes `GitCommit` and `BuildDate` into the
+  built `Info.plist`, which `BuildInfo` reads and Settings shows — check it there when a log looks like
+  an old build. The phase is ordered last so it lands before code signing, and the target sets
+  `ENABLE_USER_SCRIPT_SANDBOXING = NO` (the project keeps it on) because the sandbox denies reading
+  `.git`. A hash with a trailing `+` was built from a modified working tree.
 - Debug logging is on when the Settings toggle is set or `--debug` is passed; `--debug` forces it.
 
 ## Architecture

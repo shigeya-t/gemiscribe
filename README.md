@@ -45,6 +45,10 @@ Xcode で `GemiScribe.xcodeproj` を開いて ⌘R でも同じ場所に出ま�
 xcodebuild test -project GemiScribe.xcodeproj -scheme GemiScribe -destination 'platform=macOS'
 ```
 
+設定画面の下部に、実行中のビルドのバージョン・コミットハッシュ・ビルド日時が出ます。ハッシュ末尾の
+`+` は、コミットされていない変更を含むビルドという意味です。再ビルド後にアプリを起動し直したか
+迷ったときはここを見てください。
+
 デバッグログ付きで起動すると、Live API とのやり取りが統一ログに残ります:
 
 ```bash

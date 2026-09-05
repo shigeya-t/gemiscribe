@@ -7,6 +7,7 @@ struct SettingsView: View {
 
     @State private var apiKey: String = KeychainStore.loadAPIKey() ?? ""
     @State private var testState: TestState = .idle
+    @State private var didCopyCommit = false
 
     private enum TestState: Equatable {
         case idle
@@ -122,6 +123,28 @@ struct SettingsView: View {
                         .foregroundStyle(.secondary)
 
                     Button(loc[.resetDefaults]) { settings.resetAdvancedToDefaults() }
+                }
+
+                // Which build this is. A rebuilt app only takes effect once the running
+                // process is replaced, and the two are indistinguishable on screen.
+                Section(loc[.buildSection]) {
+                    LabeledContent(loc[.buildVersion], value: BuildInfo.version)
+                    LabeledContent(loc[.buildCommit]) {
+                        HStack(spacing: 6) {
+                            Text(BuildInfo.commit)
+                                .font(.system(.body, design: .monospaced))
+                                .textSelection(.enabled)
+                            Button {
+                                appState.copy(BuildInfo.commit)
+                                didCopyCommit = true
+                            } label: {
+                                Image(systemName: didCopyCommit ? "checkmark" : "doc.on.doc")
+                            }
+                            .buttonStyle(.borderless)
+                            .help(loc[didCopyCommit ? .buildCopied : .buildCommit])
+                        }
+                    }
+                    LabeledContent(loc[.buildDate], value: BuildInfo.builtAt)
                 }
             }
             .formStyle(.grouped)

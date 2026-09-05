@@ -66,6 +66,7 @@
 				1A000000000000000000000A /* Sources */,
 				1A000000000000000000000B /* Frameworks */,
 				1A000000000000000000000C /* Resources */,
+				1A000000000000000000001D /* Stamp build info */,
 			);
 			buildRules = (
 			);
@@ -155,6 +156,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A000000000000000000001D /* Stamp build info */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Stamp build info";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Records the commit this build came from, so the Settings window can show which\n# build is actually running. Writes into the processed Info.plist, which this phase\n# is ordered to reach before code signing.\nplist=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n[ -f \"$plist\" ] || exit 0\n\ncd \"$SRCROOT\" || exit 0\ncommit=$(git rev-parse --short=12 HEAD 2>/dev/null)\nif [ -n \"$commit\" ] && [ -n \"$(git status --porcelain 2>/dev/null)\" ]; then\n    # Built from a modified working tree: the hash alone would be misleading.\n    commit=\"${commit}+\"\nfi\n[ -n \"$commit\" ] || commit=\"unknown\"\n\nset_string() {\n    /usr/libexec/PlistBuddy -c \"Delete :$1\" \"$plist\" >/dev/null 2>&1\n    /usr/libexec/PlistBuddy -c \"Add :$1 string $2\" \"$plist\" >/dev/null\n}\nset_string GitCommit \"$commit\"\nset_string BuildDate \"$(date -u '+%Y-%m-%d %H:%M UTC')\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1A000000000000000000000A /* Sources */ = {
@@ -270,6 +293,7 @@
 				DEVELOPMENT_TEAM = V59NZ77R9C;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = GemiScribe;
@@ -302,6 +326,7 @@
 				DEVELOPMENT_TEAM = V59NZ77R9C;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = GemiScribe;
