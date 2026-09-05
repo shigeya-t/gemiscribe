@@ -1,0 +1,10 @@
+# Build output. SYMROOT/OBJROOT point here, so Xcode and xcodebuild both fill it.
+build/
+
+# Xcode per-user state
+xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# macOS
+.DS_Store
